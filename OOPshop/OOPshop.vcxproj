@@ -145,7 +145,6 @@
     <ClInclude Include="Admin.hpp" />
     <ClInclude Include="Check.hpp" />
     <ClInclude Include="Employee.hpp" />
-    <ClInclude Include="include.hpp" />
     <ClInclude Include="Official.hpp" />
     <ClInclude Include="Product.hpp" />
     <ClInclude Include="Sale.hpp" />

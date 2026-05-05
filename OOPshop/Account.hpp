@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACCOUNT
+#define ACCOUNT
 #include <vector>
 #include <string>
 
@@ -14,4 +15,6 @@ public:
     User* CheckLogin(const std::vector<User*>& users, const std::string& login, const std::string& pass);
     void ChangeUserAccounts(std::vector<User*>& users);
     void ChangeUserPass(std::vector<User*>& users, const std::string& requesterStatus);
+    void SaveUsers(const std::vector<User*>& users);
 };
+#endif

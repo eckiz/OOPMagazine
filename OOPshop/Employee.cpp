@@ -4,7 +4,7 @@
 #include "Official.hpp"
 #include <iostream>
 
-// --- Employee ---
+//Employee
 Employee::Employee(std::string l, std::string p, unsigned int i, Official* off)
     : User(l, p, "Employee", i, off) {
 }

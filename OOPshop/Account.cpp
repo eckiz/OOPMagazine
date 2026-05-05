@@ -4,7 +4,7 @@
 #include "Employee.hpp"
 #include "Admin.hpp"
 #include <iostream>
-
+#include <fstream>
 // --- Account ---
 void Account::ShowUsers(const std::vector<User*>& users, int mode) {
     std::cout << "\n--- СПИСОК ПОЛЬЗОВАТЕЛЕЙ ---\n";
@@ -20,12 +20,12 @@ void Account::AddNewUser(std::vector<User*>& users, Official* official) {
     std::cout << "Введите логин нового пользователя: ";
     std::cin >> l;
 
-    // --- ПРОВЕРКА НА УНИКАЛЬНОСТЬ ---
+//проверка
     for (const auto& u : users) {
         if (u->getLogin() == l) {
             std::cout << "\n[ОШИБКА] Пользователь с логином \"" << l << "\" уже зарегистрирован!\n";
             std::cout << "Операция отменена.\n";
-            return; // Выходим из метода, не запрашивая пароль и не создавая объект
+            return;
         }
     }
 
@@ -45,6 +45,7 @@ void Account::AddNewUser(std::vector<User*>& users, Official* official) {
     }
 
     std::cout << "[УСПЕХ] Пользователь \"" << l << "\" успешно добавлен в систему.\n";
+    SaveUsers(users);
 }
 
 void Account::DeleteUser(std::vector<User*>& users) {
@@ -55,12 +56,13 @@ void Account::DeleteUser(std::vector<User*>& users) {
             delete* it;
             users.erase(it);
             std::cout << "Пользователь удален!\n";
+            SaveUsers(users);
             return;
         }
     }
     std::cout << "Ошибка удаления (возможно это SuperAdmin или ID не найден).\n";
 }
-// В файле src/Account.cpp
+
 void Account::ChangeUserPass(std::vector<User*>& users, const std::string& requesterStatus) {
     unsigned int targetId;
     std::cout << "Введите ID пользователя для смены пароля: ";
@@ -72,21 +74,20 @@ void Account::ChangeUserPass(std::vector<User*>& users, const std::string& reque
             found = true;
             std::string targetStatus = users[i]->getStatus();
 
-            // Проверка прав доступа
             bool accessGranted = false;
 
             if (requesterStatus == "SuperAdmin") {
-                // SuperAdmin может менять пароль Админам и Продавцам
+
                 if (targetStatus == "Admin" || targetStatus == "Employee") {
                     accessGranted = true;
                 }
                 else if (targetStatus == "SuperAdmin" && users[i]->getId() == targetId) {
-                    // Разрешаем менять свой собственный пароль
+
                     accessGranted = true;
                 }
             }
             else if (requesterStatus == "Admin") {
-                // Admin может менять пароль только Продавцам
+
                 if (targetStatus == "Employee") {
                     accessGranted = true;
                 }
@@ -101,6 +102,7 @@ void Account::ChangeUserPass(std::vector<User*>& users, const std::string& reque
                 std::cin >> newPass;
                 users[i]->setPassword(newPass);
                 std::cout << "[УСПЕХ] Пароль изменен." << std::endl;
+                SaveUsers(users);
             }
             return;
         }
@@ -109,4 +111,15 @@ void Account::ChangeUserPass(std::vector<User*>& users, const std::string& reque
     if (!found) {
         std::cout << "[ОШИБКА] Пользователь с таким ID не найден." << std::endl;
     }
+}
+
+
+void Account::SaveUsers(const std::vector<User*>& users) {
+    std::ofstream out("users.txt");
+    if (out.is_open()) {
+        for (auto u : users) {
+            out << u->getId() << ";" << u->getLogin() << ";" << u->getPassword() << ";" << u->getStatus() << "\n";
+        }
+    }
+    out.close();
 }

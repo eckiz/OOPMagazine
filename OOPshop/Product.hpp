@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PRODUCT
+#define PRODUCT
 #include <string>
 
 class Product {
@@ -22,3 +23,4 @@ public:
     unsigned int getCount() const;
     void setCount(unsigned int count);
 };
+#endif  

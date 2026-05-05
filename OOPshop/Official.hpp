@@ -1,4 +1,5 @@
-#pragma once
+#ifndef OFFICIAL
+#define OFFICIAL
 #include "Account.hpp"
 #include "Storage.hpp"
 #include "Sale.hpp"
@@ -20,3 +21,4 @@ public:
     Sale& getSale();
     std::vector<User*>* getUsers();
 };
+#endif

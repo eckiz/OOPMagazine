@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CHECK
+#define CHECK
 #include <vector>
 #include "Product.hpp"
 
@@ -10,3 +11,4 @@ public:
     void PrintCheck(double totalSum);
     void Clear();
 };
+#endif

@@ -4,7 +4,7 @@
 #include "Official.hpp"
 #include <iostream>
 
-// --- Admin ---
+//Admin
 Admin::Admin(std::string l, std::string p, unsigned int i, Official* off)
     : User(l, p, "Admin", i, off) {
 }
@@ -19,16 +19,15 @@ void Admin::ShowMenu() {
             << "4. Отчет по доходам\n"
             << "0. Выход\n>> ";
 
-        // Проверка: удалось ли считать число
         if (!(std::cin >> choice)) {
             std::cout << "\n[ОШИБКА] Введите цифру из списка!\n";
-            std::cin.clear(); // Сбрасываем флаг ошибки
-            while (std::cin.get() != '\n'); // Очищаем буфер от мусора
-            continue; // Возвращаемся в начало цикла
+            std::cin.clear();
+            while (std::cin.get() != '\n');
+            continue;
         }
 
         if (choice == 1) {
-            std::cout << "1-Добавить товар, 2-Удалить товар, 3-Показать склад: ";
+            std::cout << "1-Добавить товар, 2-Удалить товар, 3-Показать склад, 4-Изменить название: ";
             int act;
             if (!(std::cin >> act)) {
                 std::cin.clear();
@@ -39,6 +38,7 @@ void Admin::ShowMenu() {
             if (act == 1) official->getStorage().AddNewItem();
             else if (act == 2) official->getStorage().DeleteItem();
             else if (act == 3) official->getStorage().ShowStorage(0);
+            else if (act == 4) official->getStorage().ChangeName();
             
         }
         else if (choice == 2) {

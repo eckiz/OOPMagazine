@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SALE
+#define SALE
 #include "Check.hpp"
 #include "Storage.hpp"
 
@@ -16,3 +17,4 @@ public:
     void ShowIncome() const;
     void StorageReturner(Storage& storage);
 };
+#endif

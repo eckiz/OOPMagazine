@@ -68,9 +68,6 @@
     <ClInclude Include="Employee.hpp">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="Official.hpp">
       <Filter>include</Filter>
     </ClInclude>

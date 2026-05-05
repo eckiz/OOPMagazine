@@ -4,9 +4,9 @@
 #include "Employee.hpp"
 #include <iostream>
 
-// --- Official ---
+//Official
 Official::Official(std::vector<User*>* u) : usersRef(u) {
-    storage.CreateStorage(); // Инициализируем демо-товарами
+    storage.CreateStorage();
 }
 void Official::Logout() { std::cout << "Выход из аккаунта...\n"; }
 Account& Official::getAccount() { return account; }

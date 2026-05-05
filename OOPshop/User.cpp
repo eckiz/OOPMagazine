@@ -5,7 +5,7 @@
 #include "Admin.hpp"
 #include <iostream>
 
-// --- User ---
+//User
 User::User(std::string l, std::string p, std::string s, unsigned int i, Official* off)
     : login(l), password(p), status(s), id(i), sales(0.0), official(off) {
 }

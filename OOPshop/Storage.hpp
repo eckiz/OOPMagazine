@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STORAGE
+#define STORAGE
 #include <vector>
 #include "Product.hpp"
 
@@ -14,5 +15,8 @@ public:
     void ChangeName();
     void AddNewItem();
     void DeleteItem();
+    void SaveToFile();
+    void LoadFromFile();
     std::vector<Product>& getProducts();
 };
+#endif

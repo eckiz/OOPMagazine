@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHOP
+#define SHOP
+
 #include <vector>
 #include "User.hpp"
 #include "Official.hpp"
@@ -14,3 +16,4 @@ public:
     bool Login();
     void CompletionUsersVector();
 };
+#endif

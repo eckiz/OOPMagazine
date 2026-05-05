@@ -1,4 +1,7 @@
-#pragma once
+#ifndef USERS
+
+#define USERS
+
 #include <string>
 
 class Official;
@@ -23,3 +26,4 @@ public:
 
     virtual void ShowMenu() = 0;
 };
+#endif 

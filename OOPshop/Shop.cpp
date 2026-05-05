@@ -3,8 +3,9 @@
 #include "SuperAdmin.hpp"
 #include "Employee.hpp"
 #include <iostream>
-
-// --- Shop ---
+#include <fstream>
+#include <sstream>
+//Shop
 Shop::Shop() {
     official = new Official(&users);
     CompletionUsersVector();
@@ -16,9 +17,41 @@ Shop::~Shop() {
 }
 
 void Shop::CompletionUsersVector() {
-    users.push_back(new SuperAdmin("root", "root", 1, official));
-    users.push_back(new Employee("user", "123", 2, official));
+    std::ifstream in("users.txt");
+
+
+    if (!in.is_open()) {
+            users.push_back(new SuperAdmin("root", "root", 1, official));
+            users.push_back(new Employee("user", "123", 2, official));
+
+        official->getAccount().SaveUsers(users); 
+    }
+    else {
+        std::string line;
+        while (std::getline(in, line)) {
+            if (line.empty()) continue;
+            std::stringstream ss(line);
+            std::string item, login, pass, status;
+            unsigned int id;
+
+            std::getline(ss, item, ';'); id = std::stoul(item);
+            std::getline(ss, login, ';');
+            std::getline(ss, pass, ';');
+            std::getline(ss, status, ';');
+
+            
+            if (status == "SuperAdmin") users.push_back(new SuperAdmin(login, pass, id, official));
+            else if (status == "Admin") users.push_back(new Admin(login, pass, id, official));
+            else if (status == "Employee") users.push_back(new Employee(login, pass, id, official));
+        }
+        in.close();
+    }
+
+
+    official->getStorage().LoadFromFile();
 }
+
+
 
 bool Shop::Login() {
     std::string l, p;
