@@ -1,45 +1,20 @@
+#include "Admin.hpp"
+#include "SuperAdmin.hpp"
 #include "Employee.hpp"
-//#include "Official.hpp"
-//#include "Storage.hpp"
-//#include "Sale.hpp"
+#include "Official.hpp"
 #include <iostream>
 
-void Employee::ShowMenu() {
-    int choice;
-    do {
-        std::cout << "\n--- РАБОЧЕЕ МЕСТО СОТРУДНИКА ---" << std::endl;
-        std::cout << "Логин: " << getLogin() << " | Роль: " << getStatus() << std::endl;
-        std::cout << "1. Просмотр наличия телефонов (Storage)" << std::endl;
-        std::cout << "2. Оформить продажу (Sale)" << std::endl;
-        std::cout << "0. Выход" << std::endl;
-        std::cout << "Выбор: ";
-
-        if (!(std::cin >> choice)) {
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            continue;
-        }
-
-        handleEmployeeChoice(choice);
-    } while (choice != 0);
+// --- Employee ---
+Employee::Employee(std::string l, std::string p, unsigned int i, Official* off)
+    : User(l, p, "Employee", i, off) {
 }
 
-void Employee::handleEmployeeChoice(int choice) { 
-    if (getOfficial() == nullptr) return;
-
-    switch (choice) {
-    case 1:
-        // Сотрудник видит склад в режиме клиента/продавца (например, mode 1)
-        getOfficial()->getStorage()->ShowStorage(1);
-        break;
-    case 2:
-        // Вызов метода продажи из класса Sale
-        getOfficial()->getSale()->Selling(0);
-        break;
-    case 0:
-        std::cout << "Завершение смены..." << std::endl;
-        break;
-    default:
-        std::cout << "Неверный пункт!" << std::endl;
-    }
+void Employee::ShowMenu() {
+    int c;
+    do {
+        std::cout << "\n--- МЕНЮ ПРОДАВЦА ---\n1. Новая продажа\n2. Посмотреть склад\n0. Выход\n>> ";
+        std::cin >> c;
+        if (c == 1) official->getSale().Selling(official->getStorage());
+        if (c == 2) official->getStorage().ShowStorage(0);
+    } while (c != 0);
 }

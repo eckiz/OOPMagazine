@@ -1,23 +1,9 @@
-#ifndef SUPERADMIN_HPP
-#define SUPERADMIN_HPP
+// SuperAdmin.hpp
+#pragma once
+#include "Admin.hpp"
 
-#include "User.hpp"
-
-class SuperAdmin : public User {
-private:
-    std::string status;
-
+class SuperAdmin : public Admin {
 public:
-    //  онструктор: инициализирует базу и ставит статус Super Admin по умолчанию
-    SuperAdmin(std::string log, std::string pass, unsigned int id)
-        : User(log, pass, "Super Admin", id), status("Super Admin") {
-    }
-
-    // ѕереопределение виртуального метода меню
+    SuperAdmin(std::string l, std::string p, unsigned int i, Official* off);
     void ShowMenu() override;
-
-private:
-    void handleSuperChoice(int choice);
 };
-
-#endif

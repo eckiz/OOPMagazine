@@ -1,22 +1,16 @@
-#ifndef SHOP_HPP
-#define SHOP_HPP
-
+#pragma once
 #include <vector>
 #include "User.hpp"
-#include "Official.hpp" // Обязательно добавляем этот инклюд
+#include "Official.hpp"
 
 class Shop {
 private:
     std::vector<User*> users;
-
+    Official* official;
 public:
-    Shop() = default;
+    Shop();
     ~Shop();
-
     void Start();
     bool Login();
-    // Изменяем сигнатуру: добавляем аргумент Official*
-    void CompletionUsersVector(Official* off);
+    void CompletionUsersVector();
 };
-
-#endif

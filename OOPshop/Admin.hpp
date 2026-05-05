@@ -1,25 +1,9 @@
-#ifndef ADMIN_HPP
-#define ADMIN_HPP
-
+// Admin.hpp
+#pragma once
 #include "User.hpp"
-#include "include.hpp"
-#include "Official.hpp"
-//эт класс
+
 class Admin : public User {
-private:
-    //статус 
-    std::string status;
 public:
-    //типо сессия 
-    Admin(std::string log, std::string pass, unsigned int id)
-        : User(log, pass, "Admin", id), status("Admin") {
-    }
-
+    Admin(std::string l, std::string p, unsigned int i, Official* off);
     void ShowMenu() override;
-
-private:
-    // Вспомогательный метод для обработки выбора (чтобы не загромождать ShowMenu)
-    void handleMenuChoice(int choice);
 };
-
-#endif

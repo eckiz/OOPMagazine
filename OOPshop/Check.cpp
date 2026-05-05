@@ -6,10 +6,14 @@ void Check::CheckPushBack(const Product& p) {
 }
 
 void Check::PrintCheck(double totalSum) {
-    std::cout << "\n********** ×ÅÊ **********" << std::endl;
+    std::cout << "\n========== ÔÈÑÊÀËÜÍÛÉ ×ÅÊ ==========\n";
     for (const auto& p : products) {
-        std::cout << p.getName() << " .......... " << p.getPrice() << std::endl;
+        std::cout << p.getName() << " x" << p.getCount() << " | " << p.getPrice() * p.getCount() << " ðóá.\n";
     }
-    std::cout << "*************************" << std::endl;
-    std::cout << "ÈÒÎÃÎ: " << totalSum << std::endl;
+    std::cout << "------------------------------------\n";
+    std::cout << "ÈÒÎÃÎ Ê ÎÏËÀÒÅ: " << totalSum << " ðóá.\n";
+    std::cout << "====================================\n";
+    Clear();
 }
+
+void Check::Clear() { products.clear(); }

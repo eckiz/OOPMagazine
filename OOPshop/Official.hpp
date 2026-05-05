@@ -1,26 +1,22 @@
-#ifndef OFFICIAL_H
-#define OFFICIAL_H
-
+#pragma once
 #include "Account.hpp"
 #include "Storage.hpp"
 #include "Sale.hpp"
+#include <vector>
+
+class User;
 
 class Official {
 private:
-    Account* accounts;
-    Storage* storage;
-    Sale* sale;
-
+    Account account;
+    Storage storage;
+    Sale sale;
+    std::vector<User*>* usersRef; // Ссылка на глобальный список пользователей
 public:
-    Official();
-    ~Official();
-
-    void Logout(); // Очистка сессии
-
-    // Геттеры согласно схеме (const)
-    Account* getAccount() const;
-    Storage* getStorage() const;
-    Sale* getSale() const;
+    Official(std::vector<User*>* users);
+    void Logout();
+    Account& getAccount();
+    Storage& getStorage();
+    Sale& getSale();
+    std::vector<User*>* getUsers();
 };
-
-#endif

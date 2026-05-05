@@ -1,7 +1,5 @@
-#ifndef USER_HPP
-#define USER_HPP
-
-#include "include.hpp"
+#pragma once
+#include <string>
 
 class Official;
 
@@ -11,20 +9,17 @@ protected:
     std::string password;
     std::string status;
     unsigned int id;
+    double sales;
     Official* official;
-
 public:
-    User(std::string log, std::string pass, std::string stat, unsigned int userId);
-    virtual ~User();
-
-    virtual void ShowMenu() = 0; 
+    User(std::string l, std::string p, std::string s, unsigned int i, Official* off);
+    virtual ~User() = default;
 
     std::string getLogin() const;
     std::string getPassword() const;
     std::string getStatus() const;
-    Official* getOfficial() const;
+    unsigned int getId() const;
+    void setPassword(const std::string& newPass);
 
-    void setOfficial(Official* off);
+    virtual void ShowMenu() = 0;
 };
-
-#endif

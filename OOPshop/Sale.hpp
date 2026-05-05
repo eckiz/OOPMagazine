@@ -1,23 +1,18 @@
-#ifndef SALE_HPP
-#define SALE_HPP
-
+#pragma once
 #include "Check.hpp"
-
-class Storage;
+#include "Storage.hpp"
 
 class Sale {
 private:
     double cash;
     double cashIncome;
-    double cashIncmone; // Опечатка из твоей схемы сохранена для соответствия
+    double cashlessIncome;
     Check check;
-
 public:
     Sale();
-    void Selling(Storage* storage);
-    void ShowIncome() const;
+    void SetCash(double amount);
     double getCash() const;
-    void setCash(double c);
+    void Selling(Storage& storage);
+    void ShowIncome() const;
+    void StorageReturner(Storage& storage);
 };
-
-#endif

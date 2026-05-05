@@ -1,52 +1,66 @@
-#include "include.hpp"
-#include "User.hpp"
+#include "Admin.hpp"
+#include "SuperAdmin.hpp"
+#include "Employee.hpp"
 #include "Official.hpp"
- 
-class Admin : public User {
-private:
-    std::string status;
+#include <iostream>
 
-public:
-    Admin(std::string log, std::string pass, unsigned int id)
-        : User(log, pass, "Admin", id) {
-        this->status = "Admin";
-    }
+// --- Admin ---
+Admin::Admin(std::string l, std::string p, unsigned int i, Official* off)
+    : User(l, p, "Admin", i, off) {
+}
 
-    // Реализация меню администратора
-    void ShowMenu() override {
-        int choice;
-        do {
-            std::cout << "\nМЕНЮ АДМИНИСТРАТОРА" << "/n";
-            std::cout << "1. Управление пользователями" << "/n";
-            std::cout << "2. Управление складом" << "/n";
-            std::cout << "3. Просмотр отчетов" << "/n";
-            std::cout << "0. Выход" << "/n";
-            std::cout << "Выбор >> ";
-            std::cin >> choice;
+void Admin::ShowMenu() {
+    int choice;
+    do {
+        std::cout << "\n--- МЕНЮ АДМИНА ---\n"
+            << "1. Склад\n"
+            << "2. Продажи\n"
+            << "3. Управление Пользователями\n"
+            << "4. Отчет по доходам\n"
+            << "0. Выход\n>> ";
 
-            handleMenuChoice(choice);
-        } 
-        while
-            (choice != 0);
-    }
+        // Проверка: удалось ли считать число
+        if (!(std::cin >> choice)) {
+            std::cout << "\n[ОШИБКА] Введите цифру из списка!\n";
+            std::cin.clear(); // Сбрасываем флаг ошибки
+            while (std::cin.get() != '\n'); // Очищаем буфер от мусора
+            continue; // Возвращаемся в начало цикла
+        }
 
-private:
-    void handleMenuChoice(int choice) {
-        //тута админ крч в офишал секс
         if (choice == 1) {
-            getOfficial()->getAccount()->ShowUsers();
+            std::cout << "1-Добавить товар, 2-Удалить товар, 3-Показать склад: ";
+            int act;
+            if (!(std::cin >> act)) {
+                std::cin.clear();
+                while (std::cin.get() != '\n');
+                continue;
+            }
+
+            if (act == 1) official->getStorage().AddNewItem();
+            else if (act == 2) official->getStorage().DeleteItem();
+            else if (act == 3) official->getStorage().ShowStorage(0);
+            
         }
         else if (choice == 2) {
-            getOfficial()->getStorage()->ShowStorage();
+            official->getSale().Selling(official->getStorage());
         }
         else if (choice == 3) {
-           getOfficial()->getSale()->ShowIncome();
+            std::cout << "1-Добавить юзера, 2-Удалить юзера, 3-Показать список,4-Сменить пароль ПОЛЬЗОВАТЕЛЮ: ";
+            int act;
+            if (!(std::cin >> act)) {
+                std::cin.clear();
+                while (std::cin.get() != '\n');
+                continue;
+            }
+
+            if (act == 1) official->getAccount().AddNewUser(*official->getUsers(), official);
+            else if (act == 2) official->getAccount().DeleteUser(*official->getUsers());
+            else if (act == 3) official->getAccount().ShowUsers(*official->getUsers(), 0);
+            else if (act == 4) official->getAccount().ChangeUserPass(*official->getUsers(), this->status);
         }
-        else if (choice == 0) {
-            std::cout << "Выход из сессии" << "/n";
+        else if (choice == 4) {
+            official->getSale().ShowIncome();
         }
-        else {
-            std::cout << "Ошибка: неверный пункт!" << "/n";
-        }
-    }
-};
+
+    } while (choice != 0);
+}

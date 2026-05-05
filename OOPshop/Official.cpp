@@ -1,21 +1,15 @@
 #include "Official.hpp"
+#include "Shop.hpp"
+#include "SuperAdmin.hpp"
+#include "Employee.hpp"
+#include <iostream>
 
-Official::Official() {
-    accounts = new Account();
-    storage = new Storage();
-    sale = new Sale();
+// --- Official ---
+Official::Official(std::vector<User*>* u) : usersRef(u) {
+    storage.CreateStorage(); // Инициализируем демо-товарами
 }
-
-Official::~Official() {
-    delete accounts;
-    delete storage;
-    delete sale;
-}
-
-Account* Official::getAccount() const { return accounts; }
-Storage* Official::getStorage() const { return storage; }
-Sale* Official::getSale() const { return sale; }
-
-void Official::Logout() {
-    // Логика выхода, если нужно сбросить временные данные
-}
+void Official::Logout() { std::cout << "Выход из аккаунта...\n"; }
+Account& Official::getAccount() { return account; }
+Storage& Official::getStorage() { return storage; }
+Sale& Official::getSale() { return sale; }
+std::vector<User*>* Official::getUsers() { return usersRef; }

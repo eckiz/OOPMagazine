@@ -1,25 +1,60 @@
 #include "Sale.hpp"
-#include "Storage.hpp"
 #include <iostream>
 
-Sale::Sale() : cash(0), cashIncome(0), cashIncmone(0) {}
+Sale::Sale() : cash(0), cashIncome(0), cashlessIncome(0) {}
 
-void Sale::Selling(Storage* storage) {
-    unsigned int id;
-    std::cout << "Введите ID телефона для продажи: "; std::cin >> id;
+void Sale::SetCash(double amount) { cash = amount; }
+double Sale::getCash() const { return cash; }
 
-    // 1. Поиск товара в storage->getProducts()
-    // 2. Если найден — уменьшаем count
-    // 3. Добавляем в check.CheckPushBack()
-    // 4. Увеличиваем cashIncome
+void Sale::Selling(Storage& storage) {
+    storage.ShowStorage(0);
+    std::vector<Product>& prods = storage.getProducts();
+    double totalSum = 0;
 
-    std::cout << "Продажа оформлена!" << std::endl;
-    check.PrintCheck(1000.0); // Пример
+    while (true) {
+        unsigned int id, count;
+        std::cout << "\nВведите ID товара (0 для завершения чека): "; std::cin >> id;
+        if (id == 0) break;
+
+        bool found = false;
+        for (auto& p : prods) {
+            if (p.getId() == id) {
+                found = true;
+                std::cout << "Количество (макс " << p.getCount() << "): "; std::cin >> count;
+                if (count > 0 && count <= p.getCount()) {
+                    p.setCount(p.getCount() - count);
+                    check.CheckPushBack(Product(p.getId(), p.getName(), p.getPrice(), count));
+                    totalSum += p.getPrice() * count;
+                    std::cout << "Добавлено в чек.\n";
+                }
+                else {
+                    std::cout << "Ошибка: Неверное количество!\n";
+                }
+                break;
+            }
+        }
+        if (!found) std::cout << "Товар не найден!\n";
+    }
+
+    if (totalSum > 0) {
+        int payType;
+        std::cout << "\nСумма: " << totalSum << " руб.\n1 - Наличные\n2 - Карта\nОплата: ";
+        std::cin >> payType;
+
+        if (payType == 1) cashIncome += totalSum;
+        else cashlessIncome += totalSum;
+
+        check.PrintCheck(totalSum);
+    }
 }
 
 void Sale::ShowIncome() const {
-    std::cout << "Общая выручка: " << cashIncome << std::endl;
+    std::cout << "\n--- СТАТИСТИКА ДОХОДОВ ---\n";
+    std::cout << "Наличные: " << cashIncome << " руб.\n";
+    std::cout << "Безнал: " << cashlessIncome << " руб.\n";
+    std::cout << "Общая выручка: " << (cashIncome + cashlessIncome) << " руб.\n";
 }
 
-double Sale::getCash() const { return cash; }
-void Sale::setCash(double c) { cash = c; }
+void Sale::StorageReturner(Storage& storage) {
+    std::cout << "Модуль возврата товара в разработке...\n";
+}

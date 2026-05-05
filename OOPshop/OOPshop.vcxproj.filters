@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{4481d93c-9cf4-4e69-bb34-06527a7b28b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Admin.cpp">
@@ -54,40 +57,40 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="Admin.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="Check.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="Employee.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="Official.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="Product.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="Sale.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="Shop.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="Storage.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="SuperAdmin.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="User.hpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

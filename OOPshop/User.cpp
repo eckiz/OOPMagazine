@@ -1,14 +1,17 @@
+#include "Account.hpp"
 #include "User.hpp"
+#include "Official.hpp"
+#include "Employee.hpp"
+#include "Admin.hpp"
+#include <iostream>
 
-User::User(std::string log, std::string pass, std::string stat, unsigned int userId)
-    : login(log), password(pass), status(stat), id(userId), official(nullptr) {
+// --- User ---
+User::User(std::string l, std::string p, std::string s, unsigned int i, Official* off)
+    : login(l), password(p), status(s), id(i), sales(0.0), official(off) {
 }
-
-User::~User() {}
 
 std::string User::getLogin() const { return login; }
 std::string User::getPassword() const { return password; }
 std::string User::getStatus() const { return status; }
-Official* User::getOfficial() const { return official; }
-
-void User::setOfficial(Official* off) { official = off; }
+unsigned int User::getId() const { return id; }
+void User::setPassword(const std::string& newPass) { password = newPass; }
