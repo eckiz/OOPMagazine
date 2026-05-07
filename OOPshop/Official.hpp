@@ -1,5 +1,5 @@
-#ifndef OFFICIAL
-#define OFFICIAL
+#ifndef OFFICIAL_HPP
+#define OFFICIAL_HPP
 #include "Account.hpp"
 #include "Storage.hpp"
 #include "Sale.hpp"

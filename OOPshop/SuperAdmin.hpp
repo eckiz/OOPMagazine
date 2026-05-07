@@ -1,5 +1,5 @@
-#ifndef SADMIN
-#define SADMIN
+#ifndef SADMIN_HPP
+#define SADMIN_HPP
 
 #include "Admin.hpp"
 

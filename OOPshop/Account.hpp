@@ -1,5 +1,5 @@
-#ifndef ACCOUNT
-#define ACCOUNT
+#ifndef ACCOUNT_HPP
+#define ACCOUNT_HPP
 #include <vector>
 #include <string>
 

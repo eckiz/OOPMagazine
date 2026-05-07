@@ -1,5 +1,5 @@
-#ifndef CHECK
-#define CHECK
+#ifndef CHECK_HPP
+#define CHECK_HPP
 #include <vector>
 #include "Product.hpp"
 

@@ -1,6 +1,5 @@
-#ifndef USERS
-
-#define USERS
+#ifndef USERS_HPP
+#define USERS_HPP
 
 #include <string>
 

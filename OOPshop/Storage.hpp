@@ -1,5 +1,5 @@
-#ifndef STORAGE
-#define STORAGE
+#ifndef STORAGE_HPP
+#define STORAGE_HPP
 #include <vector>
 #include "Product.hpp"
 
